@@ -1,6 +1,8 @@
 package pet.store.controller.error;
 
+import java.util.Map;
 import java.util.NoSuchElementException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,9 +22,9 @@ public class GlobalErrorHandler {
 	
 	@ExceptionHandler(NoSuchElementException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public String handleNoSuchElementException(NoSuchElementException ex) {
-		log.error("Pet store not found: {}", ex.getMessage());
-		return "Pet store not found";
+	public Map<String, String> handleNoSuchElementException(NoSuchElementException ex) {
+		log.error("Exception: {}", ex.toString());
+		return Map.of("message", ex.toString());
 	}
 	
 	}
